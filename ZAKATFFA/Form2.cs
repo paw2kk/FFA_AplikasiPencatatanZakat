@@ -93,3 +93,24 @@ namespace ZAKATFFA
                     jumlahBeras = Convert.ToDecimal(txtBayar.Text);
 
                 decimal totalBayar = Convert.ToDecimal(txtBayar.Text);
+
+                // Update pembayaran
+                string updatePembayaran = @"
+                    UPDATE pembayaran_zakat SET
+                        tanggal          = @tanggal,
+                        jumlah_jiwa      = @jumlah_jiwa,
+                        jumlah_uang      = @jumlah_uang,
+                        jumlah_beras     = @jumlah_beras,
+                        total_bayar      = @total_bayar,
+                        jenis_pembayaran = @jenis_pembayaran
+                    WHERE id_pembayaran  = @id_pembayaran";
+
+                cmd = new SqlCommand(updatePembayaran, kon);
+                cmd.Parameters.AddWithValue("@tanggal", dtp1.Value.Date);
+                cmd.Parameters.AddWithValue("@jumlah_jiwa", Convert.ToInt32(txtJumlahJiwa.Text));
+                cmd.Parameters.AddWithValue("@jumlah_uang", jumlahUang);
+                cmd.Parameters.AddWithValue("@jumlah_beras", jumlahBeras);
+                cmd.Parameters.AddWithValue("@total_bayar", totalBayar);
+                cmd.Parameters.AddWithValue("@jenis_pembayaran", jenis);
+                cmd.Parameters.AddWithValue("@id_pembayaran", idPembayaran);
+                cmd.ExecuteNonQuery();

@@ -203,4 +203,21 @@ namespace ZAKATFFA
                     cmd.Parameters.AddWithValue("@no_hp", txtNoHP.Text);
                     idMuzakki = Convert.ToInt32(cmd.ExecuteScalar());
                 }
+                else
+                {
+                    idMuzakki = Convert.ToInt32(hasilCek);
+                }
+
+                // Tentukan jumlah_uang atau jumlah_beras
+                object jumlahUang = DBNull.Value;
+                object jumlahBeras = DBNull.Value;
+                string jenis = cmbJenisBerasAtauUang.SelectedItem.ToString();
+
+                if (jenis == "uang")
+                    jumlahUang = Convert.ToDecimal(txtBayar.Text);
+                else
+                    jumlahBeras = Convert.ToDecimal(txtBayar.Text);
+
+                // Hitung total bayar otomatis
+                decimal totalBayar = Convert.ToDecimal(txtBayar.Text);
 

@@ -221,3 +221,22 @@ namespace ZAKATFFA
                 // Hitung total bayar otomatis
                 decimal totalBayar = Convert.ToDecimal(txtBayar.Text);
 
+
+
+                string tambahPembayaran = @"
+                    INSERT INTO pembayaran_zakat 
+                        (id_muzakki, tanggal, jumlah_jiwa, jumlah_uang, jumlah_beras, total_bayar, jenis_pembayaran)
+                    VALUES 
+                        (@id_muzakki, @tanggal, @jumlah_jiwa, @jumlah_uang, @jumlah_beras, @total_bayar, @jenis_pembayaran)";
+
+                cmd = new SqlCommand(tambahPembayaran, kon);
+                cmd.Parameters.AddWithValue("@id_muzakki", idMuzakki);
+                cmd.Parameters.AddWithValue("@tanggal", dtp1.Value.Date);
+                cmd.Parameters.AddWithValue("@jumlah_jiwa", Convert.ToInt32(txtJumlahJiwa.Text));
+                cmd.Parameters.AddWithValue("@jumlah_uang", jumlahUang);
+                cmd.Parameters.AddWithValue("@jumlah_beras", jumlahBeras);
+                cmd.Parameters.AddWithValue("@total_bayar", totalBayar);
+                cmd.Parameters.AddWithValue("@jenis_pembayaran", jenis);
+                cmd.ExecuteNonQuery();
+
+

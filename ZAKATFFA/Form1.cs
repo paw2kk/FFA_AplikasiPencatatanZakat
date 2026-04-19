@@ -64,7 +64,19 @@ namespace ZAKATFFA
             this.FormBorderStyle = FormBorderStyle.Sizable;
             this.MaximizeBox = true;
             this.BackColor = Color.FromArgb(0, 100, 0);
-            
+
+            button1.ForeColor = Color.White;
+            button1.Font = new Font("Arial", 9, FontStyle.Bold);
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.BackColor = System.Drawing.Color.DarkRed;
+
+            btnKeluar.ForeColor = Color.White;
+            btnKeluar.Font = new Font("Arial", 9, FontStyle.Bold);
+            btnKeluar.FlatStyle = FlatStyle.Flat;
+            btnKeluar.FlatAppearance.BorderSize = 0;
+            btnKeluar.BackColor = System.Drawing.Color.DarkGreen;
+
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -151,6 +163,20 @@ namespace ZAKATFFA
         private void panel1_Paint_1(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnKeluar_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+        "Apakah Anda yakin ingin keluar dari aplikasi?",
+        "Konfirmasi Keluar",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
     }
 }

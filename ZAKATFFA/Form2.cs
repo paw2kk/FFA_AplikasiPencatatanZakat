@@ -360,7 +360,10 @@ namespace ZAKATFFA
             btnUpdate.FlatStyle = FlatStyle.Flat;
             btnUpdate.FlatAppearance.BorderSize = 0;
 
-            
+            this.btnLogOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogOut.FlatAppearance.BorderSize = 0;
+            this.btnLogOut.Font = new Font("Arial", 9, FontStyle.Bold);
+            this.btnLogOut.ForeColor = Color.White;
 
             // ===== LOGO MUI DI POJOK KIRI ATAS =====
             PictureBox picLogo = new PictureBox();
@@ -468,6 +471,22 @@ namespace ZAKATFFA
         private void Form2_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+        "Apakah Anda yakin ingin logout?",
+        "Konfirmasi Logout",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Form1 formLogin = new Form1();
+                formLogin.Show();
+                this.Close();
+            }
         }
     }
 }

@@ -47,6 +47,7 @@
             this.txtBayar = new System.Windows.Forms.TextBox();
             this.dtp1 = new System.Windows.Forms.DateTimePicker();
             this.cmbJenisBerasAtauUang = new System.Windows.Forms.ComboBox();
+            this.btnLogOut = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -214,11 +215,23 @@
             this.cmbJenisBerasAtauUang.Size = new System.Drawing.Size(121, 21);
             this.cmbJenisBerasAtauUang.TabIndex = 25;
             // 
+            // btnLogOut
+            // 
+            this.btnLogOut.BackColor = System.Drawing.Color.Red;
+            this.btnLogOut.Location = new System.Drawing.Point(1703, 255);
+            this.btnLogOut.Name = "btnLogOut";
+            this.btnLogOut.Size = new System.Drawing.Size(121, 56);
+            this.btnLogOut.TabIndex = 26;
+            this.btnLogOut.Text = "Kembali";
+            this.btnLogOut.UseVisualStyleBackColor = false;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1871, 955);
+            this.Controls.Add(this.btnLogOut);
             this.Controls.Add(this.cmbJenisBerasAtauUang);
             this.Controls.Add(this.dtp1);
             this.Controls.Add(this.txtBayar);
@@ -268,6 +281,7 @@
         private System.Windows.Forms.TextBox txtBayar;
         private System.Windows.Forms.DateTimePicker dtp1;
         private System.Windows.Forms.ComboBox cmbJenisBerasAtauUang;
+        private System.Windows.Forms.Button btnLogOut;
     }
 }
 

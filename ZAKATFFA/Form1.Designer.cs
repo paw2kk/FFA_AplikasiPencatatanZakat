@@ -37,6 +37,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnKeluar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -101,8 +102,8 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.DarkGreen;
-            this.button1.Location = new System.Drawing.Point(52, 208);
+            this.button1.BackColor = System.Drawing.SystemColors.Menu;
+            this.button1.Location = new System.Drawing.Point(52, 194);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(215, 56);
             this.button1.TabIndex = 5;
@@ -113,6 +114,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel1.Controls.Add(this.btnKeluar);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.textBox2);
@@ -120,9 +122,20 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(800, 390);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(300, 300);
+            this.panel1.Size = new System.Drawing.Size(300, 330);
             this.panel1.TabIndex = 6;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint_1);
+            // 
+            // btnKeluar
+            // 
+            this.btnKeluar.BackColor = System.Drawing.SystemColors.Menu;
+            this.btnKeluar.Location = new System.Drawing.Point(52, 271);
+            this.btnKeluar.Name = "btnKeluar";
+            this.btnKeluar.Size = new System.Drawing.Size(215, 56);
+            this.btnKeluar.TabIndex = 7;
+            this.btnKeluar.Text = "KELUAR";
+            this.btnKeluar.UseVisualStyleBackColor = false;
+            this.btnKeluar.Click += new System.EventHandler(this.btnKeluar_Click);
             // 
             // Form1
             // 
@@ -151,5 +164,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnKeluar;
     }
 }

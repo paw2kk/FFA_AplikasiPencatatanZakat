@@ -153,3 +153,15 @@ namespace ZAKATFFA
                         "DELETE FROM pembayaran_zakat WHERE id_pembayaran = @id", kon);
                     cmd.Parameters.AddWithValue("@id", idPembayaran);
                     cmd.ExecuteNonQuery();
+                    MessageBox.Show("Data berhasil dihapus!", "Info",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    KosongkanForm();
+                    btnTampilData_Click(sender, e);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }

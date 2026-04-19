@@ -1,0 +1,12 @@
+C:\Users\hp victus\source\repos\ZAKATFFA\ZAKATFFA\obj\Debug\ZAKATFFA.csproj.AssemblyReference.cache
+C:\Users\hp victus\source\repos\ZAKATFFA\ZAKATFFA\obj\Debug\ZAKATFFA.Form1.resources
+C:\Users\hp victus\source\repos\ZAKATFFA\ZAKATFFA\obj\Debug\ZAKATFFA.Form2.resources
+C:\Users\hp victus\source\repos\ZAKATFFA\ZAKATFFA\obj\Debug\ZAKATFFA.Properties.Resources.resources
+C:\Users\hp victus\source\repos\ZAKATFFA\ZAKATFFA\obj\Debug\ZAKATFFA.csproj.GenerateResource.cache
+C:\Users\hp victus\source\repos\ZAKATFFA\ZAKATFFA\obj\Debug\ZAKATFFA.csproj.CoreCompileInputs.cache
+C:\Users\hp victus\source\repos\ZAKATFFA\ZAKATFFA\bin\Debug\ZAKATFFA.exe.config
+C:\Users\hp victus\source\repos\ZAKATFFA\ZAKATFFA\bin\Debug\ZAKATFFA.exe
+C:\Users\hp victus\source\repos\ZAKATFFA\ZAKATFFA\bin\Debug\ZAKATFFA.pdb
+C:\Users\hp victus\source\repos\ZAKATFFA\ZAKATFFA\obj\Debug\ZAKATFFA.exe
+C:\Users\hp victus\source\repos\ZAKATFFA\ZAKATFFA\obj\Debug\ZAKATFFA.pdb
+C:\Users\hp victus\source\repos\ZAKATFFA\ZAKATFFA\bin\Debug\cropped-logo-admin.png

@@ -140,3 +140,16 @@ namespace ZAKATFFA
                 DialogResult konfirmasi = MessageBox.Show(
                     "Apakah yakin ingin menghapus data ini?", "Konfirmasi",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+
+                if (konfirmasi == DialogResult.Yes)
+                {
+                    int idPembayaran = Convert.ToInt32(
+                        dataGridView1.SelectedRows[0].Cells["id_pembayaran"].Value);
+
+                    kon = new SqlConnection(connectionString);
+                    kon.Open();
+                    cmd = new SqlCommand(
+                        "DELETE FROM pembayaran_zakat WHERE id_pembayaran = @id", kon);
+                    cmd.Parameters.AddWithValue("@id", idPembayaran);
+                    cmd.ExecuteNonQuery();

@@ -48,6 +48,8 @@
             this.dtp1 = new System.Windows.Forms.DateTimePicker();
             this.cmbJenisBerasAtauUang = new System.Windows.Forms.ComboBox();
             this.btnLogOut = new System.Windows.Forms.Button();
+            this.txtCari = new System.Windows.Forms.TextBox();
+            this.btnCari = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -226,11 +228,31 @@
             this.btnLogOut.UseVisualStyleBackColor = false;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
+            // txtCari
+            // 
+            this.txtCari.Location = new System.Drawing.Point(1685, 57);
+            this.txtCari.Name = "txtCari";
+            this.txtCari.Size = new System.Drawing.Size(139, 20);
+            this.txtCari.TabIndex = 28;
+            // 
+            // btnCari
+            // 
+            this.btnCari.Location = new System.Drawing.Point(1569, 55);
+            this.btnCari.Name = "btnCari";
+            this.btnCari.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnCari.Size = new System.Drawing.Size(75, 23);
+            this.btnCari.TabIndex = 29;
+            this.btnCari.Text = "CARI";
+            this.btnCari.UseVisualStyleBackColor = true;
+            this.btnCari.Click += new System.EventHandler(this.btnCari_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1871, 955);
+            this.Controls.Add(this.btnCari);
+            this.Controls.Add(this.txtCari);
             this.Controls.Add(this.btnLogOut);
             this.Controls.Add(this.cmbJenisBerasAtauUang);
             this.Controls.Add(this.dtp1);
@@ -282,6 +304,8 @@
         private System.Windows.Forms.DateTimePicker dtp1;
         private System.Windows.Forms.ComboBox cmbJenisBerasAtauUang;
         private System.Windows.Forms.Button btnLogOut;
+        private System.Windows.Forms.TextBox txtCari;
+        private System.Windows.Forms.Button btnCari;
     }
 }
 

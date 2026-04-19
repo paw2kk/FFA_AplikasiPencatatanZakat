@@ -165,3 +165,17 @@ namespace ZAKATFFA
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void btnTambah_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Validasi input kosong
+                if (txtNama.Text == "" || txtAlamat.Text == "" ||
+                    txtNoHP.Text == "" || txtJumlahJiwa.Text == "" ||
+                    txtBayar.Text == "" || cmbJenisBerasAtauUang.SelectedItem == null)
+                {
+                    MessageBox.Show("Semua field harus diisi!", "Peringatan",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+

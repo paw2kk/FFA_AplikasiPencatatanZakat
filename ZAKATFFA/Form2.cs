@@ -114,3 +114,15 @@ namespace ZAKATFFA
                 cmd.Parameters.AddWithValue("@jenis_pembayaran", jenis);
                 cmd.Parameters.AddWithValue("@id_pembayaran", idPembayaran);
                 cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Data berhasil diupdate!", "Info",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                KosongkanForm();
+                btnTampilData_Click(sender, e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }

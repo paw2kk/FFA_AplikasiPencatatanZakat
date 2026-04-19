@@ -1,14 +1,16 @@
 Login Page
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/b5b60c3d-9058-4da6-927e-f3e6cde5b239" />
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/121d38ed-df94-483d-9a98-f14c97c95695" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/0b888935-3a39-4f0b-9cda-35f30325ff19" />
+<img width="1917" height="1079" alt="image" src="https://github.com/user-attachments/assets/48586e12-2c79-4c9b-b099-ef483691a87f" />
 Menu Utama
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/3f96d431-8fe3-477d-b0b1-8ffa5bde6c08" />
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/265b3c77-3331-4c22-81d9-ff94cd01fbc5" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/7b8a7328-da17-4906-96ae-3ba960acf105" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/f9a56c39-4c5c-4318-8ab4-17af410fd847" />
 Tambah Data
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/4043b080-7a70-4f3f-9f0a-cc6556eae2c7" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/5afe6a63-3cdd-4889-b72d-f8843846bc86" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/dd73623d-f408-4a57-bf08-ccfbccde86a5" />
 Hapus Data
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/73b69d89-cb72-485a-a8d2-312606ff9fd1" />
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/a69563a9-7daf-4cc7-8d94-145fd8fea3dc" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/4ded0c54-9b7f-4e2d-a814-e97dc7c5bc65" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/f2d70eaa-7f4a-48b0-9b8f-b0d886837f1f" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/ae913e08-0c9a-404d-9e0b-3f7b49749505" />
 Update Data
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/2269e82f-f05d-432b-8b27-f69b3f53f14e" />
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/b91cf253-69c8-4422-8bb5-70836f45b9a0" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/9c2f4747-d1ee-4971-b8c1-587c0864698b" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/ae886a56-a050-4554-9ce7-fa376a533207" />

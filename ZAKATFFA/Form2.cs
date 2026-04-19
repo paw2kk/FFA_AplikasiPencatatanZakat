@@ -48,3 +48,48 @@ namespace ZAKATFFA
                 cmbJenisBerasAtauUang.SelectedItem = jenis;
             }
         }
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridView1.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Pilih data yang ingin diupdate!", "Peringatan",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                int idPembayaran = Convert.ToInt32(
+                    dataGridView1.SelectedRows[0].Cells["id_pembayaran"].Value);
+
+                kon = new SqlConnection(connectionString);
+                kon.Open();
+
+                // Update muzakki
+                string updateMuzakki = @"
+                    UPDATE muzakki SET 
+                        nama   = @nama,
+                        alamat = @alamat,
+                        no_hp  = @no_hp
+                    WHERE id_muzakki = (
+                        SELECT id_muzakki FROM pembayaran_zakat 
+                        WHERE id_pembayaran = @id_pembayaran)";
+
+                cmd = new SqlCommand(updateMuzakki, kon);
+                cmd.Parameters.AddWithValue("@nama", txtNama.Text);
+                cmd.Parameters.AddWithValue("@alamat", txtAlamat.Text);
+                cmd.Parameters.AddWithValue("@no_hp", txtNoHP.Text);
+                cmd.Parameters.AddWithValue("@id_pembayaran", idPembayaran);
+                cmd.ExecuteNonQuery();
+
+                // Tentukan jumlah_uang atau jumlah_beras
+                object jumlahUang = DBNull.Value;
+                object jumlahBeras = DBNull.Value;
+                string jenis = cmbJenisBerasAtauUang.SelectedItem.ToString();
+
+                if (jenis == "uang")
+                    jumlahUang = Convert.ToDecimal(txtBayar.Text);
+                else
+                    jumlahBeras = Convert.ToDecimal(txtBayar.Text);
+
+                decimal totalBayar = Convert.ToDecimal(txtBayar.Text);

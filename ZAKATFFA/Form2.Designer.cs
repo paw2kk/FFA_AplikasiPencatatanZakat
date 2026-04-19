@@ -230,17 +230,17 @@
             // 
             // txtCari
             // 
-            this.txtCari.Location = new System.Drawing.Point(1685, 57);
+            this.txtCari.Location = new System.Drawing.Point(1703, 85);
             this.txtCari.Name = "txtCari";
-            this.txtCari.Size = new System.Drawing.Size(139, 20);
+            this.txtCari.Size = new System.Drawing.Size(121, 20);
             this.txtCari.TabIndex = 28;
             // 
             // btnCari
             // 
-            this.btnCari.Location = new System.Drawing.Point(1569, 55);
+            this.btnCari.Location = new System.Drawing.Point(1547, 85);
             this.btnCari.Name = "btnCari";
             this.btnCari.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnCari.Size = new System.Drawing.Size(75, 23);
+            this.btnCari.Size = new System.Drawing.Size(121, 23);
             this.btnCari.TabIndex = 29;
             this.btnCari.Text = "CARI";
             this.btnCari.UseVisualStyleBackColor = true;

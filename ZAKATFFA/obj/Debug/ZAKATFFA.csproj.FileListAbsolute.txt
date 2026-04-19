@@ -9,4 +9,4 @@ C:\Users\hp victus\source\repos\ZAKATFFA\ZAKATFFA\bin\Debug\ZAKATFFA.exe
 C:\Users\hp victus\source\repos\ZAKATFFA\ZAKATFFA\bin\Debug\ZAKATFFA.pdb
 C:\Users\hp victus\source\repos\ZAKATFFA\ZAKATFFA\obj\Debug\ZAKATFFA.exe
 C:\Users\hp victus\source\repos\ZAKATFFA\ZAKATFFA\obj\Debug\ZAKATFFA.pdb
-C:\Users\hp victus\source\repos\ZAKATFFA\ZAKATFFA\bin\Debug\cropped-logo-admin.png
+C:\Users\hp victus\source\repos\ZAKATFFA\ZAKATFFA\bin\Debug\logo.png

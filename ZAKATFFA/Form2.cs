@@ -179,3 +179,13 @@ namespace ZAKATFFA
                     return;
                 }
 
+                kon = new SqlConnection(connectionString);
+                kon.Open();
+
+                // Cek atau tambah muzakki dulu
+                string cekMuzakki = "SELECT id_muzakki FROM muzakki WHERE nama = @nama AND no_hp = @no_hp";
+                cmd = new SqlCommand(cekMuzakki, kon);
+                cmd.Parameters.AddWithValue("@nama", txtNama.Text);
+                cmd.Parameters.AddWithValue("@no_hp", txtNoHP.Text);
+                object hasilCek = cmd.ExecuteScalar();
+

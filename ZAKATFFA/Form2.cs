@@ -189,3 +189,18 @@ namespace ZAKATFFA
                 cmd.Parameters.AddWithValue("@no_hp", txtNoHP.Text);
                 object hasilCek = cmd.ExecuteScalar();
 
+                int idMuzakki;
+
+                if (hasilCek == null)
+                {
+                    string tambahMuzakki = @"
+                        INSERT INTO muzakki (nama, alamat, no_hp) 
+                        VALUES (@nama, @alamat, @no_hp);
+                        SELECT SCOPE_IDENTITY();";
+                    cmd = new SqlCommand(tambahMuzakki, kon);
+                    cmd.Parameters.AddWithValue("@nama", txtNama.Text);
+                    cmd.Parameters.AddWithValue("@alamat", txtAlamat.Text);
+                    cmd.Parameters.AddWithValue("@no_hp", txtNoHP.Text);
+                    idMuzakki = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+

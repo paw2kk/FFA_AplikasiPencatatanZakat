@@ -126,3 +126,17 @@ namespace ZAKATFFA
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void btnHapus_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridView1.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Pilih data yang ingin dihapus!", "Peringatan",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                DialogResult konfirmasi = MessageBox.Show(
+                    "Apakah yakin ingin menghapus data ini?", "Konfirmasi",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);

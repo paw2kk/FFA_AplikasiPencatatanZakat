@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Text. RegularExpressions;
 
 namespace ZAKATFFA
 {
@@ -56,6 +57,31 @@ namespace ZAKATFFA
                 {
                     MessageBox.Show("Pilih data yang ingin diupdate!", "Peringatan",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Validasi Nama
+                if (!Regex.IsMatch(txtNama.Text, @"^[A-Za-z' ]+$"))
+                {
+                    MessageBox.Show("Nama hanya boleh berisi huruf (A-Z / a-z) dan tanda apostrof (').",
+                        "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Validasi No HP
+                if (!Regex.IsMatch(txtNoHP.Text, @"^[0-9+]+$"))
+                {
+                    MessageBox.Show("Nomor HP hanya boleh berisi angka (0-9) dan tanda '+'.",
+                        "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // ✅ TAMBAHKAN INI - Validasi dropdown jenis pembayaran
+                string jenisInput = cmbJenisBerasAtauUang.SelectedItem?.ToString();
+                if (jenisInput != "beras" && jenisInput != "uang")
+                {
+                    MessageBox.Show("Jenis pembayaran harus dipilih: 'beras' atau 'uang'!",
+                        "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -170,14 +196,54 @@ namespace ZAKATFFA
             try
             {
                 // Validasi input kosong
-                if (txtNama.Text == "" || txtAlamat.Text == "" ||
-                    txtNoHP.Text == "" || txtJumlahJiwa.Text == "" ||
-                    txtBayar.Text == "" || cmbJenisBerasAtauUang.SelectedItem == null)
+                if (txtNama.Text.Trim() == "" || txtAlamat.Text.Trim() == "" ||
+                    txtNoHP.Text.Trim() == "" || txtJumlahJiwa.Text.Trim() == "" ||
+                    txtBayar.Text.Trim() == "" || cmbJenisBerasAtauUang.SelectedItem == null)
                 {
-                    MessageBox.Show("Semua field harus diisi!", "Peringatan",
+                    MessageBox.Show("Semua field harus diisi! " + (cmbJenisBerasAtauUang.SelectedItem != null ? "ada isi" : "gada isi"), "Peringatan",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
+                if (!Regex.IsMatch(txtNama.Text, @"^[A-Za-z' ]+$"))
+                {
+                    MessageBox.Show("Nama hanya boleh berisi huruf (A-Z / a-z) dan tanda '.",
+                        "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Validasi No HP: hanya angka dan tanda +
+                if (!Regex.IsMatch(txtNoHP.Text, @"^[0-9+]+$"))
+                {
+                    MessageBox.Show("Nomor HP hanya boleh berisi angka (0-9) dan tanda +.",
+                        "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+
+                // ✅ TAMBAHKAN INI - Validasi dropdown jenis pembayaran
+                string jenisInput = cmbJenisBerasAtauUang.SelectedItem?.ToString();
+                if (jenisInput != "beras" && jenisInput != "uang")
+                {
+                    MessageBox.Show("Jenis pembayaran harus dipilih: 'beras' atau 'uang'!",
+                        "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!int.TryParse(txtJumlahJiwa.Text, out int jumlahJiwa))
+                {
+                    MessageBox.Show("Jumlah jiwa harus berupa angka!",
+           "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!int.TryParse(txtBayar.Text, out int jumlahBayar))
+                {
+                    MessageBox.Show("Jumlah bayar harus berupa angka!",
+           "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
 
                 kon = new SqlConnection(connectionString);
                 kon.Open();
@@ -218,10 +284,6 @@ namespace ZAKATFFA
                 else
                     jumlahBeras = Convert.ToDecimal(txtBayar.Text);
 
-                // Hitung total bayar otomatis
-                decimal totalBayar = Convert.ToDecimal(txtBayar.Text);
-
-
 
                 string tambahPembayaran = @"
                     INSERT INTO pembayaran_zakat 
@@ -232,10 +294,10 @@ namespace ZAKATFFA
                 cmd = new SqlCommand(tambahPembayaran, kon);
                 cmd.Parameters.AddWithValue("@id_muzakki", idMuzakki);
                 cmd.Parameters.AddWithValue("@tanggal", dtp1.Value.Date);
-                cmd.Parameters.AddWithValue("@jumlah_jiwa", Convert.ToInt32(txtJumlahJiwa.Text));
+                cmd.Parameters.AddWithValue("@jumlah_jiwa", jumlahJiwa);
                 cmd.Parameters.AddWithValue("@jumlah_uang", jumlahUang);
                 cmd.Parameters.AddWithValue("@jumlah_beras", jumlahBeras);
-                cmd.Parameters.AddWithValue("@total_bayar", totalBayar);
+                cmd.Parameters.AddWithValue("@total_bayar", jumlahBayar);
                 cmd.Parameters.AddWithValue("@jenis_pembayaran", jenis);
                 cmd.ExecuteNonQuery();
 
@@ -435,7 +497,7 @@ namespace ZAKATFFA
             cmbJenisBerasAtauUang.BackColor = Color.White;
             cmbJenisBerasAtauUang.ForeColor = Color.Black;
             cmbJenisBerasAtauUang.Font = new Font("Arial", 9);
-
+            
             // ===== ISI DROPDOWN =====
             cmbJenisBerasAtauUang.Items.Clear();
             cmbJenisBerasAtauUang.Items.Add("beras");
@@ -444,6 +506,10 @@ namespace ZAKATFFA
 
             // ===== SET TANGGAL HARI INI =====
             dtp1.Value = DateTime.Now;
+
+            // ===== BATASI TANGGAL MINIMUM (tidak bisa mundur 3 tahun ke belakang) =====
+            dtp1.MinDate = new DateTime(DateTime.Now.Year - 3, 1, 1); // 1 Januari, 3 tahun lalu
+            dtp1.MaxDate = DateTime.Now; // Maksimal hari ini (tidak bisa pilih masa depan)
 
             // ===== LABEL COPYRIGHT =====
             Label lblCopyright = new Label();

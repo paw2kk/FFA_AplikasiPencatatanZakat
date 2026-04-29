@@ -119,7 +119,7 @@
             // 
             // btnTampilData
             // 
-            this.btnTampilData.Location = new System.Drawing.Point(1703, 115);
+            this.btnTampilData.Location = new System.Drawing.Point(1095, 125);
             this.btnTampilData.Name = "btnTampilData";
             this.btnTampilData.Size = new System.Drawing.Size(121, 23);
             this.btnTampilData.TabIndex = 10;
@@ -129,7 +129,7 @@
             // 
             // btnTambah
             // 
-            this.btnTambah.Location = new System.Drawing.Point(1703, 149);
+            this.btnTambah.Location = new System.Drawing.Point(1095, 159);
             this.btnTambah.Name = "btnTambah";
             this.btnTambah.Size = new System.Drawing.Size(121, 23);
             this.btnTambah.TabIndex = 11;
@@ -139,7 +139,7 @@
             // 
             // btnHapus
             // 
-            this.btnHapus.Location = new System.Drawing.Point(1703, 183);
+            this.btnHapus.Location = new System.Drawing.Point(1095, 193);
             this.btnHapus.Name = "btnHapus";
             this.btnHapus.Size = new System.Drawing.Size(121, 23);
             this.btnHapus.TabIndex = 12;
@@ -149,7 +149,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(1703, 212);
+            this.btnUpdate.Location = new System.Drawing.Point(1095, 222);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(121, 23);
             this.btnUpdate.TabIndex = 13;
@@ -211,6 +211,7 @@
             // 
             // cmbJenisBerasAtauUang
             // 
+            this.cmbJenisBerasAtauUang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbJenisBerasAtauUang.FormattingEnabled = true;
             this.cmbJenisBerasAtauUang.Location = new System.Drawing.Point(252, 251);
             this.cmbJenisBerasAtauUang.Name = "cmbJenisBerasAtauUang";
@@ -220,7 +221,7 @@
             // btnLogOut
             // 
             this.btnLogOut.BackColor = System.Drawing.Color.Red;
-            this.btnLogOut.Location = new System.Drawing.Point(1703, 255);
+            this.btnLogOut.Location = new System.Drawing.Point(1095, 265);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(121, 56);
             this.btnLogOut.TabIndex = 26;
@@ -230,14 +231,14 @@
             // 
             // txtCari
             // 
-            this.txtCari.Location = new System.Drawing.Point(1703, 85);
+            this.txtCari.Location = new System.Drawing.Point(1095, 95);
             this.txtCari.Name = "txtCari";
             this.txtCari.Size = new System.Drawing.Size(121, 20);
             this.txtCari.TabIndex = 28;
             // 
             // btnCari
             // 
-            this.btnCari.Location = new System.Drawing.Point(1547, 85);
+            this.btnCari.Location = new System.Drawing.Point(939, 95);
             this.btnCari.Name = "btnCari";
             this.btnCari.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnCari.Size = new System.Drawing.Size(121, 23);

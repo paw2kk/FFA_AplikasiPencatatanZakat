@@ -111,3 +111,11 @@ DELETE FROM pembayaran_zakat;
 DELETE FROM muzakki;
 
 DROP DATABASE zakatdb;
+
+ALTER TABLE muzakki
+ADD CONSTRAINT chk_no_hp
+    CHECK (no_hp NOT LIKE '%[^0-9+]%');
+
+ALTER TABLE muzakki
+ADD CONSTRAINT chk_nama
+    CHECK (nama NOT LIKE '%[^A-Za-z'' ]%');

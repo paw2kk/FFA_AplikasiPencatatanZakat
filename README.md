@@ -14,3 +14,5 @@ Hapus Data
 Update Data
 <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/9c2f4747-d1ee-4971-b8c1-587c0864698b" />
 <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/ae886a56-a050-4554-9ce7-fa376a533207" />
+Cari
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/1fece0a6-d464-41af-b83b-f46f7854007d" />

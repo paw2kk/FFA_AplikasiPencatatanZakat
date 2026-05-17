@@ -50,3 +50,20 @@ namespace ZAKATFFA
                 cmbJenisBerasAtauUang.SelectedItem = jenis;
             }
         }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow == null)
+            {
+                MessageBox.Show("Silakan pilih data yang ingin diubah pada tabel!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            try
+            {
+                // 2. Ambil id_pembayaran dari baris DataGridView yang sedang aktif
+                // Jika nama kolom manual Anda adalah "id_muzakki", pastikan disesuaikan atau gunakan index sel [1]
+                int idPembayaran = Convert.ToInt32(dataGridView1.CurrentRow.Cells["id_muzakki"].Value);
+
+                using (SqlConnection kon = new SqlConnection(connectionString))
+                {
+                    kon.Open();

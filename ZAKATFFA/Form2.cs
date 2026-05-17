@@ -218,3 +218,13 @@ namespace ZAKATFFA
                 MessageBox.Show("Data muzakki dan transaksi pembayaran berhasil disimpan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnTampilData_Click(sender, e);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (kon != null && kon.State == ConnectionState.Open) kon.Close();
+            }
+        }

@@ -135,3 +135,28 @@ namespace ZAKATFFA
                     // Jika nama kolom text-nya tidak ketemu, kita paksa ambil cell indeks ke-1 (kolom kedua dari kiri)
                     idDihapus = dataGridView1.CurrentRow.Cells[1].Value.ToString();
                 }
+
+                // 3. Konfirmasi sebelum benar-benar menghapus data
+                DialogResult dialogResult = MessageBox.Show("Apakah Anda yakin ingin menghapus data dengan ID " + idDihapus + "?", "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    using (SqlConnection kon = new SqlConnection(connectionString))
+                    {
+                        kon.Open();
+
+                        // SESUAIKAN: Ganti 'id_muzakki' dan nama 'tabel_zakat' sesuai nama field & tabel asli di database Anda
+                        string queryHapus = "EXEC sp_HapusPembayaran @id";
+
+                        using (SqlCommand cmd = new SqlCommand(queryHapus, kon))
+                        {
+                            cmd.Parameters.AddWithValue("@id", idDihapus);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    MessageBox.Show("Data berhasil dihapus!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // 4. Refresh tampilan data setelah berhasil dihapus
+                    btnTampilData_Click(sender, e);
+                }

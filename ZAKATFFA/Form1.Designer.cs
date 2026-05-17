@@ -38,6 +38,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnKeluar = new System.Windows.Forms.Button();
+            this.btnInject = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -114,6 +115,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel1.Controls.Add(this.btnInject);
             this.panel1.Controls.Add(this.btnKeluar);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.textBox1);
@@ -122,7 +124,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(800, 390);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(300, 330);
+            this.panel1.Size = new System.Drawing.Size(300, 374);
             this.panel1.TabIndex = 6;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint_1);
             // 
@@ -136,6 +138,17 @@
             this.btnKeluar.Text = "KELUAR";
             this.btnKeluar.UseVisualStyleBackColor = false;
             this.btnKeluar.Click += new System.EventHandler(this.btnKeluar_Click);
+            // 
+            // btnInject
+            // 
+            this.btnInject.BackColor = System.Drawing.SystemColors.Menu;
+            this.btnInject.Location = new System.Drawing.Point(52, 333);
+            this.btnInject.Name = "btnInject";
+            this.btnInject.Size = new System.Drawing.Size(215, 56);
+            this.btnInject.TabIndex = 8;
+            this.btnInject.Text = "INJECT";
+            this.btnInject.UseVisualStyleBackColor = false;
+            this.btnInject.Click += new System.EventHandler(this.btnInject_Click);
             // 
             // Form1
             // 
@@ -165,5 +178,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnKeluar;
+        private System.Windows.Forms.Button btnInject;
     }
 }

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using System.Text. RegularExpressions;
+using System.Text.RegularExpressions;
 
 namespace ZAKATFFA
 {
@@ -504,7 +504,7 @@ namespace ZAKATFFA
             cmbJenisBerasAtauUang.BackColor = Color.White;
             cmbJenisBerasAtauUang.ForeColor = Color.Black;
             cmbJenisBerasAtauUang.Font = new Font("Arial", 9);
-            
+
             // ===== ISI DROPDOWN =====
             cmbJenisBerasAtauUang.Items.Clear();
             cmbJenisBerasAtauUang.Items.Add("beras");
@@ -631,6 +631,5 @@ namespace ZAKATFFA
         }
     }
 }
-
 
 

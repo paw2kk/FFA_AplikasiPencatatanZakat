@@ -43,9 +43,12 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.txtNama = new System.Windows.Forms.TextBox();
+            this.muzakkiBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.zakatdbDataSet = new ZAKATFFA.zakatdbDataSet();
             this.txtAlamat = new System.Windows.Forms.TextBox();
             this.txtNoHP = new System.Windows.Forms.TextBox();
             this.txtJumlahJiwa = new System.Windows.Forms.TextBox();
+            this.pembayaranzakatBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txtBayar = new System.Windows.Forms.TextBox();
             this.dtp1 = new System.Windows.Forms.DateTimePicker();
             this.cmbJenisBerasAtauUang = new System.Windows.Forms.ComboBox();
@@ -53,28 +56,25 @@
             this.txtCari = new System.Windows.Forms.TextBox();
             this.btnCari = new System.Windows.Forms.Button();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
-            this.zakatdbDataSet = new ZAKATFFA.zakatdbDataSet();
-            this.muzakkiBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.muzakkiTableAdapter = new ZAKATFFA.zakatdbDataSetTableAdapters.muzakkiTableAdapter();
-            this.pembayaranzakatBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pembayaran_zakatTableAdapter = new ZAKATFFA.zakatdbDataSetTableAdapters.pembayaran_zakatTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.muzakkiBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zakatdbDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pembayaranzakatBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zakatdbDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.muzakkiBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pembayaranzakatBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // Nama
@@ -199,6 +199,16 @@
             this.txtNama.Size = new System.Drawing.Size(308, 20);
             this.txtNama.TabIndex = 15;
             // 
+            // muzakkiBindingSource
+            // 
+            this.muzakkiBindingSource.DataMember = "muzakki";
+            this.muzakkiBindingSource.DataSource = this.zakatdbDataSet;
+            // 
+            // zakatdbDataSet
+            // 
+            this.zakatdbDataSet.DataSetName = "zakatdbDataSet";
+            this.zakatdbDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // txtAlamat
             // 
             this.txtAlamat.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.muzakkiBindingSource, "alamat", true));
@@ -222,6 +232,11 @@
             this.txtJumlahJiwa.Name = "txtJumlahJiwa";
             this.txtJumlahJiwa.Size = new System.Drawing.Size(308, 20);
             this.txtJumlahJiwa.TabIndex = 19;
+            // 
+            // pembayaranzakatBindingSource
+            // 
+            this.pembayaranzakatBindingSource.DataMember = "pembayaran_zakat";
+            this.pembayaranzakatBindingSource.DataSource = this.zakatdbDataSet;
             // 
             // txtBayar
             // 
@@ -307,6 +322,31 @@
             this.bindingNavigator1.TabIndex = 30;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "Add new";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
+            this.bindingNavigatorCountItem.Text = "of {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Text = "Delete";
+            // 
             // bindingNavigatorMoveFirstItem
             // 
             this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -340,16 +380,9 @@
             this.bindingNavigatorPositionItem.Text = "0";
             this.bindingNavigatorPositionItem.ToolTipText = "Current position";
             // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
-            this.bindingNavigatorCountItem.Text = "of {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
-            // 
             // bindingNavigatorSeparator1
             // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
             this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // bindingNavigatorMoveNextItem
@@ -372,45 +405,12 @@
             // 
             // bindingNavigatorSeparator2
             // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "Delete";
-            // 
-            // zakatdbDataSet
-            // 
-            this.zakatdbDataSet.DataSetName = "zakatdbDataSet";
-            this.zakatdbDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // muzakkiBindingSource
-            // 
-            this.muzakkiBindingSource.DataMember = "muzakki";
-            this.muzakkiBindingSource.DataSource = this.zakatdbDataSet;
             // 
             // muzakkiTableAdapter
             // 
             this.muzakkiTableAdapter.ClearBeforeFill = true;
-            // 
-            // pembayaranzakatBindingSource
-            // 
-            this.pembayaranzakatBindingSource.DataMember = "pembayaran_zakat";
-            this.pembayaranzakatBindingSource.DataSource = this.zakatdbDataSet;
             // 
             // pembayaran_zakatTableAdapter
             // 
@@ -448,12 +448,12 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.muzakkiBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zakatdbDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pembayaranzakatBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zakatdbDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.muzakkiBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pembayaranzakatBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

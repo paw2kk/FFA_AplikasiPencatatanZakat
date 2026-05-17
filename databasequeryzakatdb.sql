@@ -119,3 +119,22 @@ ADD CONSTRAINT chk_no_hp
 ALTER TABLE muzakki
 ADD CONSTRAINT chk_nama
     CHECK (nama NOT LIKE '%[^A-Za-z'' ]%');
+
+
+-- ============================================================
+--  VIEW  -  vw_PembayaranZakat
+--  Menggantikan SELECT query panjang di btnTampilData & btnCari
+-- ============================================================
+CREATE VIEW vw_PembayaranZakat AS
+    SELECT
+        p.id_pembayaran,
+        m.nama,
+        m.alamat,
+        m.no_hp,
+        p.tanggal,
+        p.jumlah_jiwa,
+        p.jenis_pembayaran,
+        p.jumlah_uang,
+        p.jumlah_beras,
+        p.total_bayar,
+        CASE

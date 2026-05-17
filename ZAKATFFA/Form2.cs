@@ -193,3 +193,28 @@ namespace ZAKATFFA
                             "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
+
+                    using (SqlCommand cmd = new SqlCommand("sp_TambahPembayaran", kon))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        // Masukkan seluruh parameter bawaan
+                        cmd.Parameters.AddWithValue("@nama", txtNama.Text.Trim());
+                        cmd.Parameters.AddWithValue("@alamat", txtAlamat.Text.Trim());
+                        cmd.Parameters.AddWithValue("@no_hp", txtNoHP.Text.Trim());
+                        cmd.Parameters.AddWithValue("@tanggal", dtp1.Value.Date);
+                        cmd.Parameters.AddWithValue("@jumlah_jiwa", Convert.ToInt32(txtJumlahJiwa.Text));
+
+                        // ===== PERBAIKAN DI BARIS INI =====
+                        // Ganti nama parameter dari "@total_bayar" menjadi "@total_bayar_input"
+                        cmd.Parameters.AddWithValue("@total_bayar_input", Convert.ToDecimal(txtBayar.Text));
+
+                        cmd.Parameters.AddWithValue("@jenis_pembayaran", cmbJenisBerasAtauUang.Text.ToLower().Trim());
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                MessageBox.Show("Data muzakki dan transaksi pembayaran berhasil disimpan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btnTampilData_Click(sender, e);
+            }

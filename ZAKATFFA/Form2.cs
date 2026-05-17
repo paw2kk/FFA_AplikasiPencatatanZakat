@@ -22,6 +22,9 @@ namespace ZAKATFFA
 
         string connectionString = "Server=LAPTOP-1QL3V291\\PAW;Database=zakatdb;Trusted_Connection=True;";
 
+        private BindingSource _bindingSource = new BindingSource();
+        private DataTable _dt = new DataTable();
+
         public Form2()
         {
             InitializeComponent();
@@ -370,6 +373,10 @@ namespace ZAKATFFA
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'zakatdbDataSet.pembayaran_zakat' table. You can move, or remove it, as needed.
+            this.pembayaran_zakatTableAdapter.Fill(this.zakatdbDataSet.pembayaran_zakat);
+            // TODO: This line of code loads data into the 'zakatdbDataSet.muzakki' table. You can move, or remove it, as needed.
+            this.muzakkiTableAdapter.Fill(this.zakatdbDataSet.muzakki);
             // ===== FULLSCREEN =====
             this.WindowState = FormWindowState.Maximized;
             this.FormBorderStyle = FormBorderStyle.Sizable;
@@ -509,7 +516,7 @@ namespace ZAKATFFA
 
             // ===== BATASI TANGGAL MINIMUM (tidak bisa mundur 3 tahun ke belakang) =====
             dtp1.MinDate = new DateTime(DateTime.Now.Year - 3, 1, 1); // 1 Januari, 3 tahun lalu
-            dtp1.MaxDate = DateTime.Now; // Maksimal hari ini (tidak bisa pilih masa depan)
+            dtp1.MaxDate = DateTime.Today.AddDays(1); // Maksimal hari ini (tidak bisa pilih masa depan)
 
             // ===== LABEL COPYRIGHT =====
             Label lblCopyright = new Label();
@@ -531,7 +538,7 @@ namespace ZAKATFFA
             txtNoHP.Text = "";
             txtJumlahJiwa.Text = "";
             txtBayar.Text = "";
-            dtp1.Value = DateTime.Now;
+            dtp1.Value = DateTime.Today;
             cmbJenisBerasAtauUang.SelectedIndex = 0;
         }
         private void Form2_FormClosed(object sender, FormClosedEventArgs e)

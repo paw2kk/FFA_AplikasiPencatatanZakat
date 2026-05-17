@@ -172,3 +172,255 @@ CREATE PROCEDURE sp_TambahPembayaran
 AS
 BEGIN
     SET NOCOUNT ON;
+    
+    -- Hitung total yang seharusnya
+    DECLARE @total_hitung DECIMAL(15,2);
+    DECLARE @jumlah_uang  DECIMAL(15,2);
+    DECLARE @jumlah_beras DECIMAL(10,2);
+    SET @jumlah_uang  = NULL;
+    SET @jumlah_beras = NULL;
+ 
+    IF @jenis_pembayaran = 'uang'
+    BEGIN
+        SET @total_hitung = @jumlah_jiwa * 40000;
+        SET @jumlah_uang  = @total_hitung;
+    END
+    ELSE
+    BEGIN
+        SET @total_hitung = @jumlah_jiwa * 2.5;
+        SET @jumlah_beras = @total_hitung;
+    END
+    
+    -- Validasi: total dari aplikasi harus sesuai hasil hitung
+    IF @total_bayar_input <> @total_hitung
+    BEGIN
+        DECLARE @pesan VARCHAR(200);
+        SET @pesan = 'Total bayar tidak sesuai. Seharusnya ' + CAST(@total_hitung AS VARCHAR) + ' berdasarkan jumlah jiwa.';
+        RAISERROR(@pesan, 16, 1);
+        RETURN;
+    END
+ 
+    -- Cek apakah muzakki sudah ada
+    DECLARE @idMuzakki INT;
+    SELECT @idMuzakki = id_muzakki
+    FROM muzakki
+    WHERE nama = @nama AND no_hp = @no_hp;
+ 
+    -- Jika belum ada, tambahkan
+    IF @idMuzakki IS NULL
+    BEGIN
+        INSERT INTO muzakki (nama, alamat, no_hp)
+        VALUES (@nama, @alamat, @no_hp);
+        SET @idMuzakki = SCOPE_IDENTITY();
+    END
+ 
+    -- Insert pembayaran
+    INSERT INTO pembayaran_zakat
+        (id_muzakki, tanggal, jumlah_jiwa, jumlah_uang, jumlah_beras, total_bayar, jenis_pembayaran)
+    VALUES
+        (@idMuzakki, @tanggal, @jumlah_jiwa, @jumlah_uang, @jumlah_beras, @total_hitung, @jenis_pembayaran);
+ 
+    SELECT SCOPE_IDENTITY() AS id_pembayaran_baru;
+END
+GO
+ 
+-- ============================================================
+--  STORED PROCEDURE 2 - sp_UpdatePembayaran (UPDATE)
+--  Logic tambahan:
+--    - Update muzakki + pembayaran_zakat sekaligus
+--    - Hitung ulang total_bayar otomatis (tidak percaya input mentah)
+--    - Catat timestamp update via kolom log (opsional: lihat tabel audit di bawah)
+-- ============================================================
+CREATE PROCEDURE sp_UpdatePembayaran
+    @id_pembayaran    INT,
+    @nama             VARCHAR(100),
+    @alamat           VARCHAR(255),
+    @no_hp            VARCHAR(15),
+    @tanggal          DATE,
+    @jumlah_jiwa      INT,
+    @jenis_pembayaran VARCHAR(5)
+AS
+BEGIN
+    SET NOCOUNT ON;
+ 
+    -- Hitung ulang total & jumlah sesuai jenis
+    DECLARE @total_bayar  DECIMAL(15,2);
+    DECLARE @jumlah_uang  DECIMAL(15,2);
+    DECLARE @jumlah_beras DECIMAL(10,2);
+    SET @jumlah_uang  = NULL;
+    SET @jumlah_beras = NULL;
+ 
+    IF @jenis_pembayaran = 'uang'
+    BEGIN
+        SET @total_bayar = @jumlah_jiwa * 40000;
+        SET @jumlah_uang = @total_bayar;
+    END
+    ELSE
+    BEGIN
+        SET @total_bayar = @jumlah_jiwa * 2.5;
+        SET @jumlah_beras = @total_bayar;
+    END
+ 
+    -- Validasi id_pembayaran ada
+    IF NOT EXISTS (SELECT 1 FROM pembayaran_zakat WHERE id_pembayaran = @id_pembayaran)
+    BEGIN
+        RAISERROR('Data pembayaran dengan id %d tidak ditemukan.', 16, 1, @id_pembayaran);
+        RETURN;
+    END
+ 
+    -- Update muzakki
+    UPDATE muzakki SET
+        nama   = @nama,
+        alamat = @alamat,
+        no_hp  = @no_hp
+    WHERE id_muzakki = (
+        SELECT id_muzakki FROM pembayaran_zakat
+        WHERE id_pembayaran = @id_pembayaran
+    );
+ 
+    -- Update pembayaran_zakat
+    UPDATE pembayaran_zakat SET
+        tanggal          = @tanggal,
+        jumlah_jiwa      = @jumlah_jiwa,
+        jumlah_uang      = @jumlah_uang,
+        jumlah_beras     = @jumlah_beras,
+        total_bayar      = @total_bayar,
+        jenis_pembayaran = @jenis_pembayaran
+    WHERE id_pembayaran  = @id_pembayaran;
+ 
+    SELECT @total_bayar AS total_bayar_baru;
+END
+GO
+ 
+-- ============================================================
+--  STORED PROCEDURE 3 - sp_HapusPembayaran (DELETE)
+--  Logic tambahan:
+--    - Cek apakah muzakki masih punya pembayaran lain
+--    - Jika tidak ada lagi, hapus juga data muzakki (clean up)
+--    - Return pesan status
+-- ============================================================
+CREATE PROCEDURE sp_HapusPembayaran
+    @id_pembayaran INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+ 
+    -- Validasi
+    IF NOT EXISTS (SELECT 1 FROM pembayaran_zakat WHERE id_pembayaran = @id_pembayaran)
+    BEGIN
+        RAISERROR('Data tidak ditemukan.', 16, 1);
+        RETURN;
+    END
+ 
+    -- Ambil id_muzakki sebelum dihapus
+    DECLARE @idMuzakki INT;
+    SELECT @idMuzakki = id_muzakki
+    FROM pembayaran_zakat
+    WHERE id_pembayaran = @id_pembayaran;
+ 
+    -- Hapus pembayaran
+    DELETE FROM pembayaran_zakat WHERE id_pembayaran = @id_pembayaran;
+ 
+    -- Jika muzakki sudah tidak punya pembayaran lain, hapus juga
+    IF NOT EXISTS (SELECT 1 FROM pembayaran_zakat WHERE id_muzakki = @idMuzakki)
+    BEGIN
+        DELETE FROM muzakki WHERE id_muzakki = @idMuzakki;
+        SELECT 'Pembayaran dan data muzakki berhasil dihapus.' AS status;
+    END
+    ELSE
+    BEGIN
+        SELECT 'Pembayaran berhasil dihapus. Data muzakki dipertahankan.' AS status;
+    END
+END
+GO
+ 
+-- ============================================================
+--  STORED PROCEDURE 4 - sp_CariPembayaran (SEARCH via VIEW)
+--  Logic tambahan:
+--    - Cari berdasarkan nama ATAU no_hp sekaligus
+--    - Filter opsional berdasarkan jenis_pembayaran
+--    - Filter opsional berdasarkan rentang tanggal
+--    - Return jumlah total baris ditemukan
+-- ============================================================
+CREATE PROCEDURE sp_CariPembayaran
+    @keyword          VARCHAR(100) = NULL,   -- cari nama atau no_hp
+    @jenis_pembayaran VARCHAR(5)   = NULL,   -- filter: 'beras' / 'uang' / NULL (semua)
+    @tgl_mulai        DATE         = NULL,   -- filter tanggal awal (opsional)
+    @tgl_akhir        DATE         = NULL    -- filter tanggal akhir (opsional)
+AS
+BEGIN
+    SET NOCOUNT ON;
+ 
+    SELECT *
+    FROM vw_PembayaranZakat
+    WHERE
+        -- Filter nama/no_hp (jika keyword diisi)
+        (@keyword IS NULL OR
+            nama  LIKE '%' + @keyword + '%' OR
+            no_hp LIKE '%' + @keyword + '%'
+        )
+        -- Filter jenis (jika diisi)
+        AND (@jenis_pembayaran IS NULL OR jenis_pembayaran = @jenis_pembayaran)
+        -- Filter rentang tanggal (jika diisi)
+        AND (@tgl_mulai IS NULL OR tanggal >= @tgl_mulai)
+        AND (@tgl_akhir IS NULL OR tanggal <= @tgl_akhir)
+    ORDER BY tanggal DESC;
+ 
+    -- Kembalikan juga jumlah baris
+    SELECT COUNT(*) AS jumlah_ditemukan
+    FROM vw_PembayaranZakat
+    WHERE
+        (@keyword IS NULL OR nama LIKE '%' + @keyword + '%' OR no_hp LIKE '%' + @keyword + '%')
+        AND (@jenis_pembayaran IS NULL OR jenis_pembayaran = @jenis_pembayaran)
+        AND (@tgl_mulai IS NULL OR tanggal >= @tgl_mulai)
+        AND (@tgl_akhir IS NULL OR tanggal <= @tgl_akhir);
+END
+GO
+ 
+-- ============================================================
+--  STORED PROCEDURE 5 - sp_LoginPengguna
+--  Dipakai di Form1 (login)
+--  Logic tambahan:
+--    - Catat gagal login ke tabel log_login
+--    - Return status login: 1=berhasil, 0=gagal
+-- ============================================================
+ 
+-- Tabel log_login untuk audit
+CREATE TABLE log_login (
+    id_log      INT PRIMARY KEY IDENTITY(1,1),
+    nama        VARCHAR(100),
+    waktu       DATETIME DEFAULT GETDATE(),
+    status      VARCHAR(10)   -- 'BERHASIL' / 'GAGAL'
+);
+GO
+ 
+CREATE PROCEDURE sp_LoginPengguna
+    @nama     VARCHAR(100),
+    @password VARCHAR(255)
+AS
+BEGIN
+    SET NOCOUNT ON;
+ 
+    DECLARE @id INT;
+    SELECT @id = id_user
+    FROM pengguna
+    WHERE nama = @nama AND password = @password;
+ 
+    IF @id IS NOT NULL
+    BEGIN
+        INSERT INTO log_login (nama, status) VALUES (@nama, 'BERHASIL');
+        SELECT 1 AS login_sukses, @id AS id_user, @nama AS nama_user;
+    END
+    ELSE
+    BEGIN
+        INSERT INTO log_login (nama, status) VALUES (@nama, 'GAGAL');
+        SELECT 0 AS login_sukses, NULL AS id_user, NULL AS nama_user;
+    END
+END
+GO
+ 
+-- ============================================================
+--  DATA DUMMY
+-- ============================================================
+INSERT INTO pengguna (nama, password) VALUES ('admin', '123');
+INSERT INTO pengguna (nama, password) VALUES ('paw', '123');

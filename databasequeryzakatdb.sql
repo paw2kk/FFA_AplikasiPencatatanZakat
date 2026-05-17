@@ -151,3 +151,24 @@ CREATE VIEW vw_PembayaranZakat AS
     FROM pembayaran_zakat p
     JOIN muzakki m ON p.id_muzakki = m.id_muzakki;
 GO
+
+
+-- ============================================================
+--  STORED PROCEDURE 1 - sp_TambahPembayaran (INSERT)
+--  Logic tambahan:
+--    - Cek / tambah muzakki otomatis
+--    - Hitung total_bayar otomatis dari jumlah_jiwa
+--      (uang: jiwa x 40000 | beras: jiwa x 2.5 kg)
+--    - Validasi: total_bayar dari form harus sama dengan hasil hitung
+-- ============================================================
+CREATE PROCEDURE sp_TambahPembayaran
+    @nama             VARCHAR(100),
+    @alamat           VARCHAR(255),
+    @no_hp            VARCHAR(15),
+    @tanggal          DATE,
+    @jumlah_jiwa      INT,
+    @jenis_pembayaran VARCHAR(5),
+    @total_bayar_input DECIMAL(15,2)   -- dikirim dari aplikasi untuk divalidasi
+AS
+BEGIN
+    SET NOCOUNT ON;

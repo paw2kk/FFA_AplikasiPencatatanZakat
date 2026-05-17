@@ -16,3 +16,5 @@ Update Data
 <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/ae886a56-a050-4554-9ce7-fa376a533207" />
 Cari
 <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/1fece0a6-d464-41af-b83b-f46f7854007d" />
+
+Skenario sqlinjection dimana pada login page bisa digunakan dengan mengisi textbox dengan' OR 1=1-- dan menekan tombol inject

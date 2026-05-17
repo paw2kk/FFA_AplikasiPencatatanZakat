@@ -160,3 +160,14 @@ namespace ZAKATFFA
                     // 4. Refresh tampilan data setelah berhasil dihapus
                     btnTampilData_Click(sender, e);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (kon != null && kon.State == ConnectionState.Open) kon.Close();
+            }
+        }

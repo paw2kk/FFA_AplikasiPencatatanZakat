@@ -260,3 +260,29 @@ namespace ZAKATFFA
                 // 4. Kolom Nomer Handphone
                 dataGridView1.Columns.Add("no_hp", "Nomer Handphone");
                 dataGridView1.Columns["no_hp"].DataPropertyName = "no_hp";
+
+                // 5. Kolom Tanggal
+                dataGridView1.Columns.Add("tanggal", "Tanggal");
+                dataGridView1.Columns["tanggal"].DataPropertyName = "tanggal";
+
+                // 6. Kolom Jumlah Jiwa
+                dataGridView1.Columns.Add("jumlah_jiwa", "Jumlah Jiwa");
+                dataGridView1.Columns["jumlah_jiwa"].DataPropertyName = "jumlah_jiwa";
+
+                // 7. Kolom Jenis Pembayaran
+                dataGridView1.Columns.Add("jenis_pembayaran", "Jenis Pembayaran");
+                dataGridView1.Columns["jenis_pembayaran"].DataPropertyName = "jenis_pembayaran";
+
+                // 8. Kolom Total Bayar
+                dataGridView1.Columns.Add("total_bayar", "Total Bayar");
+                dataGridView1.Columns["total_bayar"].DataPropertyName = "total_bayar";
+
+                // ===== BARU SETELAH ITU ISI DATA SOURCE-NYA =====
+                dataGridView1.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }

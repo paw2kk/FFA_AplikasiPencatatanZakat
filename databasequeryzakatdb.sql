@@ -138,3 +138,16 @@ CREATE VIEW vw_PembayaranZakat AS
         p.jumlah_beras,
         p.total_bayar,
         CASE
+        
+            WHEN p.jenis_pembayaran = 'beras'
+                THEN CAST(p.jumlah_beras AS VARCHAR) + ' kg'
+            WHEN p.jenis_pembayaran = 'uang'
+                THEN 'Rp ' + FORMAT(p.jumlah_uang, 'N0')
+        END AS jumlah_dengan_satuan,
+        -- Kolom tambahan: label ringkas untuk laporan
+        m.nama + ' (' + p.jenis_pembayaran + ')' AS label_ringkas,
+        -- Kolom tambahan: flag apakah termasuk pembayar besar (> 5 jiwa)
+        CASE WHEN p.jumlah_jiwa > 5 THEN 'Ya' ELSE 'Tidak' END AS keluarga_besar
+    FROM pembayaran_zakat p
+    JOIN muzakki m ON p.id_muzakki = m.id_muzakki;
+GO

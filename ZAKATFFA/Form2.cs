@@ -109,3 +109,29 @@ namespace ZAKATFFA
                 if (kon != null && kon.State == ConnectionState.Open) kon.Close();
             }
         }
+
+        private void btnHapus_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow == null)
+            {
+                MessageBox.Show("Silakan pilih data pada tabel terlebih dahulu yang ingin dihapus!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                // 2. AMBIL ID DARI KOLOM YANG VALID
+                // Karena kita mengubah urutan kolom manual, gunakan kolom "id_muzakki" atau indeks kolom [1] 
+                // yang memuat data kunci (Primary Key) dari database Anda.
+
+                string idDihapus = "";
+
+                if (dataGridView1.Columns["id_muzakki"] != null)
+                {
+                    idDihapus = dataGridView1.CurrentRow.Cells["id_muzakki"].Value.ToString();
+                }
+                else
+                {
+                    // Jika nama kolom text-nya tidak ketemu, kita paksa ambil cell indeks ke-1 (kolom kedua dari kiri)
+                    idDihapus = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+                }

@@ -93,3 +93,19 @@ namespace ZAKATFFA
                         cmd.ExecuteNonQuery();
                     }
                 }
+
+                MessageBox.Show("Data transaksi pembayaran dan profil muzakki berhasil diperbarui!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // 6. Refresh GridView agar data terupdate langsung muncul
+                btnTampilData_Click(sender, e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (kon != null && kon.State == ConnectionState.Open) kon.Close();
+            }
+        }

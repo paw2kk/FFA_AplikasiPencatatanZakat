@@ -228,3 +228,35 @@ namespace ZAKATFFA
                 if (kon != null && kon.State == ConnectionState.Open) kon.Close();
             }
         }
+
+        private void btnTampilData_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                kon = new SqlConnection(connectionString);
+                string query = "SELECT * FROM v_pembayaran_zakat";
+                da = new SqlDataAdapter(query, kon);
+                dt = new DataTable();
+                da.Fill(dt);
+
+                // ===== KOLOM PENUH OTOMATIS =====
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dataGridView1.Columns.Clear();
+                dataGridView1.AutoGenerateColumns = false;
+
+                // ===== ATUR LEBAR KOLOM TERTENTU =====
+                // 1. Kolom Nama (Taruh paling kiri setelah kolom nomor bawaan)
+                dataGridView1.Columns.Add("nama", "Nama");
+                dataGridView1.Columns["nama"].DataPropertyName = "nama"; // Harus sama persis dengan nama kolom di database
+
+                // 2. Kolom ID Muzakki (Menggeser ID ke sebelah kanan nama)
+                dataGridView1.Columns.Add("id_muzakki", "ID Muzakki");
+                dataGridView1.Columns["id_muzakki"].DataPropertyName = "id_muzakki";
+
+                // 3. Kolom Alamat
+                dataGridView1.Columns.Add("alamat", "Alamat");
+                dataGridView1.Columns["alamat"].DataPropertyName = "alamat";
+
+                // 4. Kolom Nomer Handphone
+                dataGridView1.Columns.Add("no_hp", "Nomer Handphone");
+                dataGridView1.Columns["no_hp"].DataPropertyName = "no_hp";

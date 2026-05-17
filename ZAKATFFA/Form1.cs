@@ -192,14 +192,53 @@ namespace ZAKATFFA
                 {
                     conn.Open();
 
-                    string query =
-                        "update pengguna set nama = 'HACKED' where nama='" +
-                        textBox1.Text + "'";
+                    // !! QUERY RENTAN: input digabung langsung ke string !!
+                    // Jangan gunakan pola ini di produksi!
+                    string queryRentan =
+                        "SELECT COUNT(*) FROM pengguna " +
+                        "WHERE nama = '" + textBox1.Text + "' " +
+                        "AND password = '" + textBox2.Text + "'";
 
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    // Query yang sebenarnya dieksekusi:
+                    // SELECT COUNT(*) FROM pengguna
+                    // WHERE nama = '' OR '1'='1' AND password = '' OR '1'='1'
+                    // → selalu TRUE → COUNT > 0 → login berhasil!
+
+                    using (SqlCommand cmdInject = new SqlCommand(queryRentan, conn))
                     {
-                        int result = cmd.ExecuteNonQuery();
-                        MessageBox.Show(result + "Baris Terupdate");
+                        int hasil = Convert.ToInt32(cmdInject.ExecuteScalar());
+
+                        // Tampilkan query asli agar terlihat bahayanya
+                        MessageBox.Show(
+                            "=== DEMO SQL INJECTION ===\n\n" +
+                            "Query yang dieksekusi:\n" +
+                            queryRentan + "\n\n" +
+                            $"Hasil COUNT(*) = {hasil}\n\n" +
+                            (hasil > 0
+                                ? "⚠ LOGIN BERHASIL tanpa password yang benar!\n" +
+                                  "Injeksi membuat kondisi WHERE selalu TRUE."
+                                : "Injeksi tidak berhasil pada database ini."),
+                            "SQL Injection Demo",
+                            MessageBoxButtons.OK,
+                            hasil > 0 ? MessageBoxIcon.Warning : MessageBoxIcon.Information);
+
+                        // Jika injeksi berhasil → buka Form2 seperti login normal
+                        if (hasil > 0)
+                        {
+                            // Catat ke log (pakai parameterized agar log-nya aman)
+                            string logQuery =
+                                "INSERT INTO log_login (nama, status) VALUES (@nama, @status)";
+                            using (SqlCommand cmdLog = new SqlCommand(logQuery, conn))
+                            {
+                                cmdLog.Parameters.AddWithValue("@nama", textBox1.Text);
+                                cmdLog.Parameters.AddWithValue("@status", "INJECT");
+                                cmdLog.ExecuteNonQuery();
+                            }
+
+                            Form2 formData = new Form2();
+                            formData.Show();
+                            this.Hide();
+                        }
                     }
                 }
             }

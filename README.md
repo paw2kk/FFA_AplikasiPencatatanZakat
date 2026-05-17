@@ -18,3 +18,6 @@ Cari
 <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/1fece0a6-d464-41af-b83b-f46f7854007d" />
 
 Skenario sqlinjection dimana pada login page bisa digunakan dengan mengisi textbox dengan' OR 1=1-- dan menekan tombol inject
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/9108df15-8854-4b19-9dd7-66ddc6fbd0aa" />
+<img width="1919" height="1078" alt="image" src="https://github.com/user-attachments/assets/ba2e1a0f-bcab-4041-9a82-1e90248e42b6" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/aab99898-448e-44d1-a80a-dfd7bb2eebc4" />

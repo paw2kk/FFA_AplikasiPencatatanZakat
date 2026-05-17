@@ -171,3 +171,25 @@ namespace ZAKATFFA
                 if (kon != null && kon.State == ConnectionState.Open) kon.Close();
             }
         }
+
+        private void btnTambah_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlConnection kon = new SqlConnection(connectionString))
+                {
+                    kon.Open();
+                    if (!Regex.IsMatch(txtNama.Text, @"^[A-Za-z' ]+$"))
+                    {
+                        MessageBox.Show("Nama hanya boleh berisi huruf (A-Z / a-z) dan tanda '.",
+                            "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // Validasi No HP: hanya angka dan tanda +
+                    if (!Regex.IsMatch(txtNoHP.Text, @"^[0-9+]+$"))
+                    {
+                        MessageBox.Show("Nomor HP hanya boleh berisi angka (0-9) dan tanda +.",
+                            "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }

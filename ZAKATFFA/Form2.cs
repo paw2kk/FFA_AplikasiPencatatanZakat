@@ -67,3 +67,29 @@ namespace ZAKATFFA
                 using (SqlConnection kon = new SqlConnection(connectionString))
                 {
                     kon.Open();
+
+                    // 3. Panggil nama Stored Procedure yang ada di SQL Server Anda
+                    using (SqlCommand cmd = new SqlCommand("sp_UpdatePembayaran", kon))
+                    {
+                        // Wajib set jenis command menjadi StoredProcedure
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        // 4. Daftarkan seluruh parameter (Harus sama persis dengan variabel di SQL)
+                        cmd.Parameters.AddWithValue("@id_pembayaran", idPembayaran);
+                        cmd.Parameters.AddWithValue("@nama", txtNama.Text);
+                        cmd.Parameters.AddWithValue("@alamat", txtAlamat.Text);
+                        cmd.Parameters.AddWithValue("@no_hp", txtNoHP.Text);
+
+                        // Mengambil nilai tanggal saja dari DateTimePicker
+                        cmd.Parameters.AddWithValue("@tanggal", dtp1.Value.Date);
+
+                        cmd.Parameters.AddWithValue("@jumlah_jiwa", Convert.ToInt32(txtJumlahJiwa.Text));
+                        cmd.Parameters.AddWithValue("@total_bayar", Convert.ToDecimal(txtBayar.Text));
+
+                        // Pastikan teks bernilai 'uang' atau 'beras' (huruf kecil agar sesuai logika IF di SP Anda)
+                        cmd.Parameters.AddWithValue("@jenis_pembayaran", cmbJenisBerasAtauUang.Text.ToLower().Trim());
+
+                        // 5. Eksekusi program ke database
+                        cmd.ExecuteNonQuery();
+                    }
+                }

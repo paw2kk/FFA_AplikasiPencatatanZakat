@@ -424,3 +424,26 @@ GO
 -- ============================================================
 INSERT INTO pengguna (nama, password) VALUES ('admin', '123');
 INSERT INTO pengguna (nama, password) VALUES ('paw', '123');
+
+INSERT INTO muzakki (nama, alamat, no_hp) VALUES ('Ahmad Fauzi',   'Jl. Mawar No.1, Wonosobo',     '081234567890');
+INSERT INTO muzakki (nama, alamat, no_hp) VALUES ('Budi Santoso',  'Jl. Melati No.5, Wonosobo',    '082345678901');
+INSERT INTO muzakki (nama, alamat, no_hp) VALUES ('Citra Dewi',    'Jl. Anggrek No.3, Wonosobo',   '083456789012');
+INSERT INTO muzakki (nama, alamat, no_hp) VALUES ('Dian Pratama',  'Jl. Kenanga No.7, Wonosobo',   '084567890123');
+INSERT INTO muzakki (nama, alamat, no_hp) VALUES ('Eko Wahyudi',   'Jl. Dahlia No.2, Wonosobo',    '085678901234');
+INSERT INTO muzakki (nama, alamat, no_hp) VALUES ('Fitri Rahayu',  'Jl. Tulip No.9, Wonosobo',     '086789012345');
+INSERT INTO muzakki (nama, alamat, no_hp) VALUES ('Galih Permana', 'Jl. Flamboyan No.4, Wonosobo', '087890123456');
+INSERT INTO muzakki (nama, alamat, no_hp) VALUES ('Hana Sari',     'Jl. Cempaka No.6, Wonosobo',   '088901234567');
+INSERT INTO muzakki (nama, alamat, no_hp) VALUES ('Irfan Hakim',   'Jl. Sakura No.8, Wonosobo',    '089012345678');
+INSERT INTO muzakki (nama, alamat, no_hp) VALUES ('Joko Susilo',   'Jl. Nusa Indah No.10, Wonosobo','081122334455');
+ 
+INSERT INTO pembayaran_zakat (id_muzakki,tanggal,jumlah_jiwa,jumlah_uang,jumlah_beras,total_bayar,jenis_pembayaran)
+VALUES (1,'2026-04-01',4,NULL,10.00,10.00,'beras'),
+       (2,'2026-04-02',3,NULL,7.50, 7.50, 'beras'),
+       (3,'2026-04-03',5,NULL,12.50,12.50,'beras'),
+       (4,'2026-04-04',2,NULL,5.00, 5.00, 'beras'),
+       (5,'2026-04-05',6,NULL,15.00,15.00,'beras'),
+       (6,'2026-04-06',4,160000,NULL,160000,'uang'),
+       (7,'2026-04-07',3,120000,NULL,120000,'uang'),
+       (8,'2026-04-08',5,200000,NULL,200000,'uang'),
+       (9,'2026-04-09',2,80000, NULL,80000, 'uang'),
+       (10,'2026-04-10',7,280000,NULL,280000,'uang');

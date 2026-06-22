@@ -1,3 +1,11 @@
 <Solution>
-  <Project Path="ZAKATFFA/ZAKATFFA.csproj" Id="7e462ea1-b9ba-4cb4-8cd1-e0627e5113ed" />
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="ZAKATFFA/ZAKATFFA.csproj" Id="7e462ea1-b9ba-4cb4-8cd1-e0627e5113ed">
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="Release|x86" Project="x86" />
+  </Project>
 </Solution>
